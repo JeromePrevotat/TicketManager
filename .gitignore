@@ -1,0 +1,99 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+.vscode/
+.DS_Store
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.iml
+
+# Rider
+.idea/
+.idea_modules/
+*.sln.iml
+riderModule.iml_add_modules_import
+
+# ReSharper
+.resharper
+.resharper.user
+*.resharper
+*.resharper.user
+[Rr]esharper*/
+_ReSharper*/
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+package-lock.json
+packages/
+
+# Entity Framework
+*.db
+*.db-shm
+*.db-wal
+
+# Local user-specific files
+appsettings.local.json
+appsettings.*.local.json
+secrets.json
+
+# Testing
+TestResults/
+coverage/
+*.trx
+
+# Build outputs
+dist/
+publish/
+
+# Node.js (if using npm/yarn for frontend assets)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# OS files
+Thumbs.db
+*.swp
+*.swo
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+
+# Miscellaneous
+*.log
+*.vspx
+*.coverage
+*.coveragexml
