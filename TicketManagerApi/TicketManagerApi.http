@@ -1,6 +1,17 @@
-@TicketManagerApi_HostAddress = http://localhost:5205
+@TicketManagerApi_HostAddress = http://localhost:5205/api
 
+###
 GET {{TicketManagerApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+POST {{TicketManagerApi_HostAddress}}/auth/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "TestPassword123!"
+}
+

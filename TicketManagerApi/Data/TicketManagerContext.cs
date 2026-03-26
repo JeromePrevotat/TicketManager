@@ -18,13 +18,31 @@ public class TicketManagerContext (DbContextOptions<TicketManagerContext> option
     base.OnModelCreating(modelBuilder);
 
     EnumAsString(modelBuilder);
+    ConfigReliationships(modelBuilder);
+  }
 
-    // Configure relationships
-    // Many to Many
+  private static void EnumAsString(ModelBuilder modelBuilder)
+  {
+    // Configure enums as strings
+    modelBuilder.Entity<Ticket>()
+      .Property(t => t.Status)
+      .HasConversion<string>();
+
+    modelBuilder.Entity<Ticket>()
+      .Property(t => t.Severity)
+      .HasConversion<string>();
+
+    modelBuilder.Entity<Role>()
+      .Property(r => r.RoleName)
+      .HasConversion<string>();  
+  }
+
+  private static void ConfigReliationships(ModelBuilder modelBuilder)
+  {
     modelBuilder.Entity<User>()
-        .HasMany(e => e.Roles)
-        .WithMany(e => e.UsersRoles)
-        .UsingEntity("UsersRoles");
+      .HasMany(e => e.Roles)
+      .WithMany(e => e.UsersRoles)
+      .UsingEntity("UsersRoles");
 
     modelBuilder.Entity<User>()
       .HasMany(e => e.TicketsAssigned)
@@ -61,21 +79,5 @@ public class TicketManagerContext (DbContextOptions<TicketManagerContext> option
       .HasOne(e => e.Author)
       .WithMany(e => e.TicketsCreated)
       .HasForeignKey(e => e.AuthorId);
-  }
-
-  private static void EnumAsString(ModelBuilder modelBuilder)
-  {
-    // Configure enums as strings
-    modelBuilder.Entity<Ticket>()
-      .Property(t => t.Status)
-      .HasConversion<string>();
-
-    modelBuilder.Entity<Ticket>()
-      .Property(t => t.Severity)
-      .HasConversion<string>();
-
-    modelBuilder.Entity<Role>()
-      .Property(r => r.RoleName)
-      .HasConversion<string>();  
   }
 }
