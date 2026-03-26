@@ -10,8 +10,17 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "email": "testuser@example.com",
+  "username": "testuser2",
+  "email": "testuser2@example.com",
   "password": "TestPassword123!"
 }
 
+###
+POST {{TicketManagerApi_HostAddress}}/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}

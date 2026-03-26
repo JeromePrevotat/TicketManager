@@ -9,6 +9,12 @@ public class UserRegisterDtoValidator : AbstractValidator<UserRegisterDto>
 {
   public UserRegisterDtoValidator(TicketManagerContext dbContext)
   {
+    RuleFor(x => x.Username)
+      .MinimumLength(3)
+      .MustAsync(async (username, cancellation) => 
+        !await dbContext.Users.AnyAsync(u => u.Username == username, cancellation))
+      .WithMessage("Username is already taken.");
+
     RuleFor(x => x.Email)
       .NotEmpty()
       .EmailAddress()
@@ -20,10 +26,5 @@ public class UserRegisterDtoValidator : AbstractValidator<UserRegisterDto>
       .NotEmpty()
       .MinimumLength(6);
 
-    RuleFor(x => x.Username)
-      .MinimumLength(3)
-      .MustAsync(async (username, cancellation) => 
-        !await dbContext.Users.AnyAsync(u => u.Username == username, cancellation))
-      .WithMessage("Username is already taken.");
   }
 }

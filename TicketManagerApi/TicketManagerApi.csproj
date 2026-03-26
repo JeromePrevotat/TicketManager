@@ -27,10 +27,8 @@
     <Folder Include="Data\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Data\Seeding\" />
-    <Folder Include="DTO\" />
     <Folder Include="DTO\ApplicationsDTO\" />
     <Folder Include="DTO\TicketsDTO\" />
-    <Folder Include="DTO\UsersDTO\" />
     <Folder Include="Entities\" />
     <Folder Include="Mapper\" />
     <Folder Include="Mapper\ApplicationMapper\" />

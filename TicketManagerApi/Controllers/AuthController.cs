@@ -20,9 +20,20 @@ namespace TicketManagerApi.Controllers
         }
         
         [HttpPost("login", Name = "Login")]
-        public IActionResult Login()
+        public async Task<IActionResult> Login(
+            [FromBody] UserLoginDto userLoginDto)
         {
-            return Ok();
+            var result =await authService.Login(userLoginDto);
+            if (result is null)
+            {
+                return Unauthorized(new ProblemDetails
+                {
+                    Title = "Invalid credentials",
+                    Status = StatusCodes.Status401Unauthorized,
+                    Detail = "Invalid Credentials."
+                });
+            }
+            return Ok(result);
         }
         
         [HttpGet("logout", Name = "Logout")]
