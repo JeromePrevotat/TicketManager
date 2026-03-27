@@ -1,13 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TicketManagerApi.Entities;
 
 namespace TicketManagerApi.Data;
 
-public class TicketManagerContext (DbContextOptions<TicketManagerContext> options) : DbContext(options)
+public class TicketManagerContext (
+  DbContextOptions<TicketManagerContext> options)
+  : IdentityDbContext<User, IdentityRole<int>, int>(options)
 {
-  public DbSet<Role> Roles => Set<Role>();
-  public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-  public DbSet<User> Users => Set<User>();
   public DbSet<Application> Applications => Set<Application>();
   public DbSet<Ticket> Tickets => Set<Ticket>();
   public DbSet<Attachment> Attachments => Set<Attachment>();
@@ -18,7 +19,7 @@ public class TicketManagerContext (DbContextOptions<TicketManagerContext> option
     base.OnModelCreating(modelBuilder);
 
     EnumAsString(modelBuilder);
-    ConfigReliationships(modelBuilder);
+    ConfigRelationships(modelBuilder);
   }
 
   private static void EnumAsString(ModelBuilder modelBuilder)
@@ -31,19 +32,11 @@ public class TicketManagerContext (DbContextOptions<TicketManagerContext> option
     modelBuilder.Entity<Ticket>()
       .Property(t => t.Severity)
       .HasConversion<string>();
-
-    modelBuilder.Entity<Role>()
-      .Property(r => r.RoleName)
-      .HasConversion<string>();  
   }
 
-  private static void ConfigReliationships(ModelBuilder modelBuilder)
-  {
-    modelBuilder.Entity<User>()
-      .HasMany(e => e.Roles)
-      .WithMany(e => e.UsersRoles)
-      .UsingEntity("UsersRoles");
-
+  private static void ConfigRelationships(ModelBuilder modelBuilder)
+  {    
+    // Many to Many
     modelBuilder.Entity<User>()
       .HasMany(e => e.TicketsAssigned)
       .WithMany(e => e.AssignedTo)

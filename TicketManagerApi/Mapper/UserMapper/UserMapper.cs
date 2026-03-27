@@ -10,8 +10,8 @@ public static class UserMapper
     return new UserSummaryDto
     {
       Id = user.Id,
-      Username = user.Username is null ? user.Email : user.Username,
-      Email = user.Email
+      Username = user.UserName ?? user.Email!,
+      Email = user.Email!
     };
   }
 }

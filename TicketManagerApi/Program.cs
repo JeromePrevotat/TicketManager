@@ -1,28 +1,12 @@
 using FluentValidation;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Identity;
 using Npgsql;
 using TicketManagerApi.Data;
-using TicketManagerApi.Mapper.UserMapper;
+using TicketManagerApi.Entities;
 using TicketManagerApi.Services;
 using TicketManagerApi.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<UserService>();
-
 var conStrBuilder = new NpgsqlConnectionStringBuilder
 {
   Host = "localhost",
@@ -31,10 +15,28 @@ var conStrBuilder = new NpgsqlConnectionStringBuilder
   Password = builder.Configuration["DbPassword"],
   Database = "TicketManager"
 };
-
 var connectionString = conStrBuilder.ConnectionString;
+
 builder.Services.AddNpgsql<TicketManagerContext>(connectionString);
 
+builder.Services.AddIdentityApiEndpoints<User>(options =>
+    {
+        options.Password.RequiredLength = 3;
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredUniqueChars = 1;
+        options.User.RequireUniqueEmail = true;  
+    })
+    .AddRoles<IdentityRole<int>>()
+    .AddEntityFrameworkStores<TicketManagerContext>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher>();
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 
@@ -50,9 +52,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseExceptionHandler();
 
-// app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
+// app.UseHttpsRedirection();
 
 app.MapControllers();
+app.MapIdentityApi<User>();
 
 app.Run();

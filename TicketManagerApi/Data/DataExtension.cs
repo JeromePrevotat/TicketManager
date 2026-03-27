@@ -15,7 +15,6 @@ public static class DataExtension
   public static async Task SeedDb(this WebApplication app)
   {
     using var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<TicketManagerContext>();
-    await DbSeeding.SeedDbAsync(dbContext);
+    await DbSeeding.SeedDbAsync(scope.ServiceProvider);
   }
 }

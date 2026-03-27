@@ -1,53 +1,46 @@
 namespace TicketManagerApi.Data.Seeding;
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TicketManagerApi.Entities;
-using BC = BCrypt.Net.BCrypt;
 
 public static class DbSeeding
 {
-  public static async Task SeedDbAsync(TicketManagerContext context)
+  public static async Task SeedDbAsync(IServiceProvider services)
   {
-    var roles = new List<Role>
-    {
-      new() { RoleName = RoleName.ADMIN },
-      new() { RoleName = RoleName.USER }
-    };
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole<int>>>();
+    var userManager = services.GetRequiredService<UserManager<User>>();
 
-    await SeedRoles(context, roles);
-    await SeedUsers(context, roles);
-    await context.SaveChangesAsync();
+    await SeedRoles(roleManager);
+    await SeedUsers(userManager);
   }
 
-  public static async Task SeedRoles(
-    TicketManagerContext context,
-    List<Role> roles)
+  private static async Task SeedRoles(
+    RoleManager<IdentityRole<int>> roleManager
+  )
   {
-    if (await context.Roles.AnyAsync()) return ;
-
-    context.Roles.AddRange(
-      roles
-    );
+    string[] roles = ["Admin", "User"];
+    foreach (var role in roles)
+    {
+      if (!await roleManager.RoleExistsAsync(role))
+      {
+        await roleManager.CreateAsync(new IdentityRole<int> { Name = role });
+      }
+    }
   }
 
   public static async Task SeedUsers(
-    TicketManagerContext context,
-    List<Role> roles)
+    UserManager<User> userManager
+  )
   {
-    if (await context.Users.AnyAsync()) return ;
+    if (await userManager.Users.AnyAsync()) return ;
 
-    context.Users.AddRange(
-      new User {
-        Username = "admin",
-        Email = "admin@admin.com",
-        Password = BC.EnhancedHashPassword("admin", 11),
-        Roles = roles
-      },
-      new User {
-        Username = "user",
-        Email = "user@user.com",
-        Password = BC.EnhancedHashPassword("user", 11),
-        Roles = [.. roles.Where(r => r.RoleName == RoleName.USER)]
-      }
-    );
+    var admin = new User { UserName = "admin", Email = "admin@admin.com" };
+    await userManager.CreateAsync(admin, "admin");
+    await userManager.AddToRolesAsync(admin, ["Admin", "User"]);
+
+    var user = new User { UserName = "user", Email = "user@user.com" };
+    await userManager.CreateAsync(user, "user");
+    await userManager.AddToRoleAsync(user, "User");
   }
 }
