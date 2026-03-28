@@ -1,11 +1,16 @@
-using System;
+using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace TicketManagerApi.Validators;
 
-public class ValidationExceptionHandler : IExceptionHandler
+public class ValidationExceptionHandler (
+  IOptions<JsonOptions> jsonOptions
+): IExceptionHandler
 {
+  private readonly JsonSerializerOptions _serializerOptions = jsonOptions.Value.JsonSerializerOptions;
   public async ValueTask<bool> TryHandleAsync
   (
     HttpContext httpContext,
@@ -34,7 +39,9 @@ public class ValidationExceptionHandler : IExceptionHandler
       {
         Status = StatusCodes.Status400BadRequest,
         Title = "Validation failed",
-      }, cancellation
+      },
+      _serializerOptions,
+      cancellation
     );
     return true;
   }

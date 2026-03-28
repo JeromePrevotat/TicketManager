@@ -7,7 +7,6 @@ namespace TicketManagerApi.Entities;
 [Index(nameof(Email), IsUnique = true)]
 public class User : IdentityUser<int>
 {
-  // Many-to-many relationship with Role
   public List<Ticket> TicketsCreated { get; set; } = [];
   public List<Ticket> TicketsFollowed { get; set; } = [];
   public List<Ticket> TicketsUpvoted { get; set; } = [];

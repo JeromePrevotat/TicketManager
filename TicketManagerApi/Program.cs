@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi;
 using Npgsql;
+using Swashbuckle.AspNetCore.Filters;
 using TicketManagerApi.Data;
 using TicketManagerApi.Entities;
 using TicketManagerApi.Services;
@@ -31,12 +34,27 @@ builder.Services.AddIdentityApiEndpoints<User>(options =>
     })
     .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<TicketManagerContext>();
+// To use BCrypt
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Description = "JWT Authorization header using the Bearer scheme"
+    });
+    options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
+});
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();

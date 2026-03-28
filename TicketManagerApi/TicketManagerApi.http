@@ -1,7 +1,8 @@
-@TicketManagerApi_HostAddress = http://localhost:5205/api
+@TicketManagerApi_HostAddress = http://localhost:5205/api/
+@TicketManager_HostAddress = http://localhost:5205
 
 ###
-POST {{TicketManagerApi_HostAddress}}/auth/register
+POST {{TicketManager_HostAddress}}/register
 Accept: application/json
 Content-Type: application/json
 
@@ -12,11 +13,11 @@ Content-Type: application/json
 }
 
 ###
-POST {{TicketManagerApi_HostAddress}}/auth/login
+POST {{TicketManager_HostAddress}}/login
 Accept: application/json
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "email": "admin",
   "password": "admin"
 }

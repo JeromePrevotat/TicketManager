@@ -6,7 +6,8 @@ using TicketManagerApi.Entities;
 namespace TicketManagerApi.Data;
 
 public class TicketManagerContext (
-  DbContextOptions<TicketManagerContext> options)
+  DbContextOptions<TicketManagerContext> options
+)
   : IdentityDbContext<User, IdentityRole<int>, int>(options)
 {
   public DbSet<Application> Applications => Set<Application>();
