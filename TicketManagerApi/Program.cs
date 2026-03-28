@@ -10,6 +10,8 @@ using TicketManagerApi.Services;
 using TicketManagerApi.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Database connection
 var conStrBuilder = new NpgsqlConnectionStringBuilder
 {
   Host = "localhost",
@@ -19,9 +21,9 @@ var conStrBuilder = new NpgsqlConnectionStringBuilder
   Database = "TicketManager"
 };
 var connectionString = conStrBuilder.ConnectionString;
-
 builder.Services.AddNpgsql<TicketManagerContext>(connectionString);
 
+// Authentication
 builder.Services.AddIdentityApiEndpoints<User>(options =>
     {
         options.Password.RequiredLength = 3;
@@ -36,12 +38,6 @@ builder.Services.AddIdentityApiEndpoints<User>(options =>
     .AddEntityFrameworkStores<TicketManagerContext>();
 // To use BCrypt
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher>();
-
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(options =>
@@ -55,12 +51,22 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
 });
+
+// Controllers
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+// Error Handling
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 
 var app = builder.Build();
 await app.MigrateDb();
+await app.SyncSequences();
 await app.SeedDb();
 
 // Configure the HTTP request pipeline.

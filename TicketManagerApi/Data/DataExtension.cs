@@ -17,4 +17,15 @@ public static class DataExtension
     using var scope = app.Services.CreateScope();
     await DbSeeding.SeedDbAsync(scope.ServiceProvider);
   }
+  public static async Task SyncSequences(this WebApplication app)
+  {
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<TicketManagerContext>();
+
+    await dbContext.Database.ExecuteSqlRawAsync(@"
+        SELECT setval(pg_get_serial_sequence('""Applications""', 'Id'), COALESCE(MAX(""Id""), 1), MAX(""Id"") IS NOT NULL) FROM ""Applications"";
+        SELECT setval(pg_get_serial_sequence('""Tickets""', 'Id'), COALESCE(MAX(""Id""), 1), MAX(""Id"") IS NOT NULL) FROM ""Tickets"";
+        SELECT setval(pg_get_serial_sequence('""Attachments""', 'Id'), COALESCE(MAX(""Id""), 1), MAX(""Id"") IS NOT NULL) FROM ""Attachments"";
+    ");
+}
 }

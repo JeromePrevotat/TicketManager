@@ -34,8 +34,6 @@
     <Folder Include="DTO\ApplicationsDTO\" />
     <Folder Include="DTO\TicketsDTO\" />
     <Folder Include="Entities\" />
-    <Folder Include="Mapper\" />
-    <Folder Include="Mapper\ApplicationMapper\" />
     <Folder Include="Mapper\TicketMapper\" />
     <Folder Include="Mapper\UserMapper\" />
     <Folder Include="Middlewares\" />
