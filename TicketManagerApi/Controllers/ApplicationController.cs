@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TicketManagerApi.Data;
 using TicketManagerApi.DTO.ApplicationsDTO;
 using TicketManagerApi.Entities;
@@ -56,6 +57,31 @@ namespace TicketManagerApi.Controllers
             if (application is null) return NotFound();
 
             return ApplicationDetailsMapper.ToDTO(application);
+        }
+
+        [HttpGet(Name = "GetAllApplications")]
+        public async Task<ActionResult<ApplicationDetailsDTO>> GetAllApplications(
+            TicketManagerContext dbContext
+        )
+        {
+            var applications = await dbContext.Applications.ToListAsync();
+            return Ok(applications.Select(app => ApplicationDetailsMapper.ToDTO(app)));
+        }
+
+        [HttpDelete("{id}", Name = "DeleteApplicationById")]
+        public async Task<ActionResult> DeleteApplicationById(
+            int id,
+            TicketManagerContext dbContext
+        )
+        {
+            var application = await dbContext.Applications.FindAsync(id);
+            if (application is not null)
+            {
+                await dbContext.Applications
+                    .Where(app => app.Id == id)
+                    .ExecuteDeleteAsync();
+            }
+            return Ok();
         }
     }
 }
