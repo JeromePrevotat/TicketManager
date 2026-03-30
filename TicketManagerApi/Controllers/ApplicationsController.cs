@@ -82,14 +82,14 @@ namespace TicketManagerApi.Controllers
                     .Where(app => app.Id == id)
                     .ExecuteDeleteAsync();
             }
-            return Ok();
+            return NoContent();
         }
     
         [Authorize]
-        [HttpPut("{id}", Name = "UpdateApplicationById")]
+        [HttpPut("{id}", Name = "EditApplicationById")]
         public async Task<ActionResult> Edit(
             int id,
-            ApplicationDetailsDTO updatedApplicationDTO,
+            ApplicationEditDTO updatedApplicationDTO,
             TicketManagerContext dbContext
         )
         {
@@ -101,11 +101,32 @@ namespace TicketManagerApi.Controllers
             await dbContext.Applications
                 .Where(app => app.Id == id)
                 .ExecuteUpdateAsync(s => s
-                    .SetProperty(a => a.OwnerId, updatedApplicationDTO.OwnerId)
-                    .SetProperty(a => a.Name, updatedApplicationDTO.Name)
-                    .SetProperty(a => a.Description, updatedApplicationDTO.Description)
+                    .SetProperty(
+                        a => a.OwnerId,
+                        a => (updatedApplicationDTO.OwnerId == null)
+                            ? a.OwnerId
+                            : updatedApplicationDTO.OwnerId
+                    )
+                    .SetProperty(
+                        a => a.Name,
+                        a => String.IsNullOrEmpty(updatedApplicationDTO.Name)
+                            ? a.Name
+                            : updatedApplicationDTO.Name
+                    )
+                    .SetProperty(
+                        a => a.Description,
+                        a => String.IsNullOrEmpty(updatedApplicationDTO.Description)
+                            ? a.Description
+                            : updatedApplicationDTO.Description
+                    )
                     .SetProperty(a => a.UpdatedAt, DateTime.UtcNow)
                 );
+            if (updatedApplicationDTO.Members != null)
+            {
+                application.Members.Clear();
+                application.Members.AddRange(updatedApplicationDTO.Members);
+                await dbContext.SaveChangesAsync();
+            }
             return NoContent();
         }
     }

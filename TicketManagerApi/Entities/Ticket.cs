@@ -10,8 +10,8 @@ public class Ticket
   public DateTime CreatedAt { get; set; }
   public DateTime UpdatedAt { get; set; }
   public required string Title { get; set; }
-  public required string Description { get; set; }
-  public TicketSeverity Severity { get; set; }
+  public required string Content { get; set; }
+  public required TicketSeverity Severity { get; set; }
   public TicketStatus Status { get; set; }
   public List<User> AssignedTo { get; set; } = [];
   public List<User> UpvotedBy { get; set; } = [];

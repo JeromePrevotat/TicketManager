@@ -15,7 +15,7 @@ public static class TicketDetailsMapper
       CreatedAt = ticket.CreatedAt,
       UpdatedAt = ticket.UpdatedAt,
       Title = ticket.Title,
-      Description = ticket.Description,
+      Content = ticket.Content,
       Severity = ticket.Severity,
       Status = ticket.Status
     };
