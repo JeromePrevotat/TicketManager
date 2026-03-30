@@ -8,11 +8,11 @@ using TicketManagerApi.Mapper.ApplicationMapper;
 
 namespace TicketManagerApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ApplicationController : ControllerBase
     {
+        [Authorize]
         [HttpPost(Name = "CreateApplication")]
         public async Task<ActionResult<ApplicationDetailsDTO>> CreateApplication
         (
@@ -68,6 +68,7 @@ namespace TicketManagerApi.Controllers
             return Ok(applications.Select(app => ApplicationDetailsMapper.ToDTO(app)));
         }
 
+        [Authorize]
         [HttpDelete("{id}", Name = "DeleteApplicationById")]
         public async Task<ActionResult> DeleteApplicationById(
             int id,
@@ -82,6 +83,30 @@ namespace TicketManagerApi.Controllers
                     .ExecuteDeleteAsync();
             }
             return Ok();
+        }
+    
+        [Authorize]
+        [HttpPut("{id}", Name = "UpdateApplicationById")]
+        public async Task<ActionResult> UpdateApplicationById(
+            int id,
+            ApplicationDetailsDTO updatedApplicationDTO,
+            TicketManagerContext dbContext
+        )
+        {
+            var application = await dbContext.Applications.FindAsync(id);
+            if (application is null)
+            {
+                return NotFound();
+            }
+            await dbContext.Applications
+                .Where(app => app.Id == id)
+                .ExecuteUpdateAsync(s => s
+                    .SetProperty(a => a.OwnerId, updatedApplicationDTO.OwnerId)
+                    .SetProperty(a => a.Name, updatedApplicationDTO.Name)
+                    .SetProperty(a => a.Description, updatedApplicationDTO.Description)
+                    .SetProperty(a => a.UpdatedAt, DateTime.UtcNow)
+                );
+            return NoContent();
         }
     }
 }
