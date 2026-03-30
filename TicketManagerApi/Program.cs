@@ -59,6 +59,11 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
+// Routing
+builder.Services.AddRouting(options =>
+    options.LowercaseUrls = true
+);
+
 // Error Handling
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddProblemDetails();

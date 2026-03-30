@@ -10,7 +10,7 @@ namespace TicketManagerApi.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class TicketController : ControllerBase
+    public class TicketsController : ControllerBase
     {
         [HttpGet(Name = "GetAllTickets")]
         public async Task<ActionResult<IEnumerable<TicketDetailsDTO>>> Get(TicketManagerContext dbContext)

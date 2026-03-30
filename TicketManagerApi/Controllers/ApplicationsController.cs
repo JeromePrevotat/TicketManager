@@ -10,11 +10,11 @@ namespace TicketManagerApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationController : ControllerBase
+    public class ApplicationsController : ControllerBase
     {
         [Authorize]
         [HttpPost(Name = "CreateApplication")]
-        public async Task<ActionResult<ApplicationDetailsDTO>> CreateApplication
+        public async Task<ActionResult<ApplicationDetailsDTO>> Create
         (
             ApplicationCreateDTO newAppDto,
             TicketManagerContext dbContext
@@ -70,7 +70,7 @@ namespace TicketManagerApi.Controllers
 
         [Authorize]
         [HttpDelete("{id}", Name = "DeleteApplicationById")]
-        public async Task<ActionResult> DeleteApplicationById(
+        public async Task<ActionResult> Delete(
             int id,
             TicketManagerContext dbContext
         )
@@ -87,7 +87,7 @@ namespace TicketManagerApi.Controllers
     
         [Authorize]
         [HttpPut("{id}", Name = "UpdateApplicationById")]
-        public async Task<ActionResult> UpdateApplicationById(
+        public async Task<ActionResult> Edit(
             int id,
             ApplicationDetailsDTO updatedApplicationDTO,
             TicketManagerContext dbContext
