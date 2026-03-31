@@ -32,7 +32,6 @@
     <Folder Include="Data\Migrations\" />
     <Folder Include="Data\Seeding\" />
     <Folder Include="DTO\ApplicationsDTO\" />
-    <Folder Include="DTO\TicketsDTO\" />
     <Folder Include="Entities\" />
     <Folder Include="Mapper\TicketMapper\" />
     <Folder Include="Mapper\UserMapper\" />

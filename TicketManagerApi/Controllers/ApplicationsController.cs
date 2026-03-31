@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using TicketManagerApi.Data;
 using TicketManagerApi.DTO.ApplicationsDTO;
 using TicketManagerApi.Entities;
@@ -94,10 +95,7 @@ namespace TicketManagerApi.Controllers
         )
         {
             var application = await dbContext.Applications.FindAsync(id);
-            if (application is null)
-            {
-                return NotFound();
-            }
+            if (application is null) return NotFound();
             await dbContext.Applications
                 .Where(app => app.Id == id)
                 .ExecuteUpdateAsync(s => s
@@ -121,12 +119,28 @@ namespace TicketManagerApi.Controllers
                     )
                     .SetProperty(a => a.UpdatedAt, DateTime.UtcNow)
                 );
-            if (updatedApplicationDTO.Members != null)
-            {
-                application.Members.Clear();
-                application.Members.AddRange(updatedApplicationDTO.Members);
-                await dbContext.SaveChangesAsync();
-            }
+            return NoContent();
+        }
+    
+        [Authorize]
+        [HttpPut("{id}/team", Name = "EditApplicationTeam")]
+        public async Task<ActionResult> EditTeam (
+            int id,
+            ApplicationEditTeamDTO updatedTeamDTO,
+            TicketManagerContext dbContext
+        )
+        {
+            var application = await dbContext.Applications
+                .Include(app => app.Members)
+                .FirstOrDefaultAsync(app => app.Id == id);
+            if (application is null) return NotFound();
+            var updatedTeam = await dbContext.Users
+                                        .Where(u => updatedTeamDTO.MembersId.Contains(u.Id))
+                                        .ToListAsync();
+            application.Members.Clear();
+            application.Members.AddRange(updatedTeam);
+            await dbContext.SaveChangesAsync();
+
             return NoContent();
         }
     }

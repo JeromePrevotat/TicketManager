@@ -8,8 +8,8 @@ public class TicketEditDTO
   public string? Content { get; set; }
   public TicketSeverity? Severity { get; set; }
   public TicketStatus? Status { get; set; }
-  public List<User>? AssignedTo { get; set; }
-  public List<User>? UpvotedBy { get; set; }
-  public List<User>? FollowedBy { get; set; }
-  public List<Attachment>? Attachments { get; set; }
+  public List<int>? AssignedTo { get; set; }
+  public List<int>? UpvotedBy { get; set; }
+  public List<int>? FollowedBy { get; set; }
+  public List<int>? AttachmentsId { get; set; }
 }

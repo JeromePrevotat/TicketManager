@@ -40,6 +40,9 @@ namespace TicketManagerApi.Controllers
             var user = await DbContext.Users.FindAsync(int.Parse(userId));
             if (user is null)
                 return Unauthorized();
+            var attachements = await DbContext.Attachments
+                                        .Where(a => newTicketDTO.AttachmentsId.Contains(a.Id))
+                                        .ToListAsync();
             
             Ticket newTicket = new()
             {
@@ -56,7 +59,7 @@ namespace TicketManagerApi.Controllers
                 AssignedTo = [],
                 UpvotedBy = [],
                 FollowedBy = [],
-                Attachments = newTicketDTO.Attachments
+                Attachments = attachements
             };
             await DbContext.AddAsync(newTicket);
             await DbContext.SaveChangesAsync();
@@ -121,26 +124,6 @@ namespace TicketManagerApi.Controllers
                     .SetProperty(t => t.UpdatedAt, DateTime.UtcNow)
                 );
 
-            if (updatedTicketDTO.AssignedTo != null)
-            {
-                ticket.AssignedTo.Clear();
-                ticket.AssignedTo.AddRange(updatedTicketDTO.AssignedTo);
-            }
-            if (updatedTicketDTO.UpvotedBy != null)
-            {
-                ticket.UpvotedBy.Clear();
-                ticket.UpvotedBy.AddRange(updatedTicketDTO.UpvotedBy);
-            }
-            if (updatedTicketDTO.FollowedBy != null)
-            {
-                ticket.FollowedBy.Clear();
-                ticket.FollowedBy.AddRange(updatedTicketDTO.FollowedBy);
-            }
-            if (updatedTicketDTO.Attachments != null)
-            {
-                ticket.Attachments.Clear();
-                ticket.Attachments.AddRange(updatedTicketDTO.Attachments);
-            }
             await dbContext.SaveChangesAsync();
             return NoContent();
         }
@@ -161,5 +144,94 @@ namespace TicketManagerApi.Controllers
             }
             return NoContent();
         }
+    
+        [Authorize]
+        [HttpPut("{id}/assignements", Name = "EditTicketAssignements")]
+        public async Task<ActionResult> EditTicketAssignements (
+            int id,
+            TicketAssignmentDTO updatedAssignementsDTO,
+            TicketManagerContext dbContext
+        )
+        {
+            var ticket = await dbContext.Tickets
+                .Include(t => t.AssignedTo)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (ticket is null) return NotFound();
+            var updatedAssignements = await dbContext.Users
+                                        .Where(u => updatedAssignementsDTO.AssignedTo.Contains(u.Id))
+                                        .ToListAsync();
+            ticket.AssignedTo.Clear();
+            ticket.AssignedTo.AddRange(updatedAssignements);
+            await dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+        
+        [Authorize]
+        [HttpPut("{id}/followers", Name = "EditTicketFollowers")]
+        public async Task<ActionResult> EditTicketFollowers (
+            int id,
+            TicketFollowersDTO updatedFollowersDTO,
+            TicketManagerContext dbContext
+        )
+        {
+            var ticket = await dbContext.Tickets
+                .Include(t => t.FollowedBy)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (ticket is null) return NotFound();
+            var updatedFollowers = await dbContext.Users
+                                        .Where(u => updatedFollowersDTO.Followers.Contains(u.Id))
+                                        .ToListAsync();
+            ticket.FollowedBy.Clear();
+            ticket.FollowedBy.AddRange(updatedFollowers);
+            await dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+        
+        [Authorize]
+        [HttpPut("{id}/upvoters", Name = "EditTicketUpvoters")]
+        public async Task<ActionResult> EditTicketUpvoters (
+            int id,
+            TicketUpvotersDTO updatedUpvotersDTO,
+            TicketManagerContext dbContext
+        )
+        {
+            var ticket = await dbContext.Tickets
+                .Include(t => t.UpvotedBy)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (ticket is null) return NotFound();
+            var updatedUpvoters = await dbContext.Users
+                                        .Where(u => updatedUpvotersDTO.Upvoters.Contains(u.Id))
+                                        .ToListAsync();
+            ticket.UpvotedBy.Clear();
+            ticket.UpvotedBy.AddRange(updatedUpvoters);
+            await dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+    
+        [Authorize]
+        [HttpPut("{id}/attachements", Name = "EditTicketAttachements")]
+        public async Task<ActionResult> EditTicketAttachements (
+            int id,
+            TicketEditAttachementsDTO updatedAttachementsDTO,
+            TicketManagerContext dbContext
+        )
+        {
+            var ticket = await dbContext.Tickets
+                .Include(t => t.Attachments)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (ticket is null) return NotFound();
+            var updatedAttachements = await dbContext.Attachments
+                                        .Where(u => updatedAttachementsDTO.AttachementsId.Contains(u.Id))
+                                        .ToListAsync();
+            ticket.Attachments.Clear();
+            ticket.Attachments.AddRange(updatedAttachements);
+            await dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+    
     }
 }
