@@ -1,0 +1,22 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  padding: 16px;
+  margin: 16px auto 0 auto;
+}
+
+#password-label-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#password-recovery-a {
+  margin-left: 8px;
+}
+
+.form-input-container {
+  width: 100%;
+}

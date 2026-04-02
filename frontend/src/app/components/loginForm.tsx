@@ -12,6 +12,9 @@ import TextField from '@mui/material/TextField';
 import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 
+import "../style/loginForm.css";
+
+
 export default function InputAdornments() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -32,17 +35,32 @@ export default function InputAdornments() {
       noValidate
       autoComplete="off"
     >
-      <div className='formContainer'>
+      <div className='formContainer bordered rounded'>
         <h1>Sign In</h1>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+        <FormControl
+          variant="outlined"
+          className='form-input-container'
+        >
           <FormLabel htmlFor="outlined-username-input">Username</FormLabel>
-          <TextField
+          <OutlinedInput
             id="outlined-username-input"
             type="text"
             autoComplete="username"
           />
-          <FormLabel htmlFor="outlined-adornment-password">Password</FormLabel>
-          <a href='#'>Forgot password ?</a>
+        </FormControl>
+        <FormControl
+          variant="outlined"
+          className='form-input-container'
+        >
+          <div id='password-label-container'>
+            <FormLabel htmlFor="outlined-adornment-password">Password</FormLabel>
+            <a
+              href='#'
+              id = "password-recovery-a"
+            >
+              Forgot password ?
+            </a>
+          </div>
           <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
@@ -63,10 +81,10 @@ export default function InputAdornments() {
             }
             label="Password"
           />
-          <Button variant="contained" endIcon={<SendIcon />}>
-            Sign In
-          </Button>
         </FormControl>
+        <Button variant="contained" endIcon={<SendIcon />}>
+          Sign In
+        </Button>
         <p>Don't have an account? <a href='#'>Sign Up</a></p>
       </div>
     </Box>
