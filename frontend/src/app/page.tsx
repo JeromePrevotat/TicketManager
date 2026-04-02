@@ -1,5 +1,6 @@
 import LoginForm from "./components/loginForm";
 import PrimarySearchAppBar from "./components/navbar";
+import RegisterForm from "./components/registerForm";
 import SideNav from "./components/sideNav";
 
 export default function Home() {
@@ -9,7 +10,8 @@ export default function Home() {
       <div className = 'main-container'>
         <SideNav />
         <main>
-          <LoginForm />
+          {/* <LoginForm /> */}
+          <RegisterForm />
         </main>
       </div>
     </div>
