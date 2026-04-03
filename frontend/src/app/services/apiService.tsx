@@ -10,5 +10,16 @@ export const ApiService = {
       body: JSON.stringify({ email, password }),
     });
     return response.json();
+  },
+
+  async login(email: string, password: string) {
+    const response = await fetch(`${BaseUrl}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password })
+    });
+    return response.json();
   }
 };

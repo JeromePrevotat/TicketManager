@@ -17,6 +17,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/userContext';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -59,6 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const currentUser = useContext(UserContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -100,8 +103,21 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {
+        currentUser == null
+          ? (
+              [
+                <MenuItem key={"register"} onClick={handleMenuClose}>Register</MenuItem>,
+                <MenuItem key={"signin"} onClick={handleMenuClose}>Sign In</MenuItem>
+              ]
+            )
+          : (
+              [
+                <MenuItem key={"profile"} onClick={handleMenuClose}>Profile</MenuItem>,
+                <MenuItem key={"myaccount"} onClick={handleMenuClose}>My account</MenuItem>
+              ]
+            )
+      }
     </Menu>
   );
 

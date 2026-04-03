@@ -12,9 +12,12 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 
 import "../style/loginForm.css";
+import { ApiService } from '../services/apiService';
 
 
 export default function InputAdornments() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -26,6 +29,16 @@ export default function InputAdornments() {
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  const handleLogin = async () => {
+    try {
+      const response = await ApiService.login(email, password);
+      console.log(response);
+    }
+    catch (error) {
+      console.error("Login failed: ", error);
+    }
+  }
 
   return (
     <Box
@@ -45,6 +58,8 @@ export default function InputAdornments() {
             id="outlined-username-input"
             type="text"
             autoComplete="username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </FormControl>
         <FormControl
@@ -63,6 +78,8 @@ export default function InputAdornments() {
           <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -81,7 +98,11 @@ export default function InputAdornments() {
             label="Password"
           />
         </FormControl>
-        <Button variant="contained" endIcon={<SendIcon />}>
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={handleLogin}
+        >
           Sign In
         </Button>
         <p>Don't have an account? <a href='#'>Sign Up</a></p>
