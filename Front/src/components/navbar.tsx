@@ -17,8 +17,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/userContext';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,9 +63,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   const currentUser = useContext(UserContext);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -107,8 +109,14 @@ export default function PrimarySearchAppBar() {
         currentUser == null
           ? (
               [
-                <MenuItem key={"register"} onClick={handleMenuClose}>Register</MenuItem>,
-                <MenuItem key={"signin"} onClick={handleMenuClose}>Sign In</MenuItem>
+                <MenuItem key={"register"} onClick={() => {
+                  handleMenuClose();
+                  navigate("/register");
+                }}>Register</MenuItem>,
+                <MenuItem key={"signin"} onClick={() => {
+                  handleMenuClose();
+                  navigate("/login");
+                }} >Sign In</MenuItem>
               ]
             )
           : (

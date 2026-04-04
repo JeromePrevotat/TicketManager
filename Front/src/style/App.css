@@ -1,0 +1,9 @@
+main {
+  display: flex;
+  height: 100vh;
+  flex: 1;
+}
+
+.main-content {
+  flex: 1; 
+}

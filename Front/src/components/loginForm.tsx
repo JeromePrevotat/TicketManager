@@ -1,4 +1,3 @@
-'use client'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Box from '@mui/material/Box';
@@ -12,6 +11,8 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 
 import "../style/loginForm.css";
+import "../style/globals.css";
+
 import { ApiService } from '../services/apiService';
 
 
