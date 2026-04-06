@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -17,9 +15,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { useState, useContext } from 'react';
-import { UserContext } from '../contexts/userContext';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../authStore';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const currentUser = useContext(UserContext);
+  const { user } = useAuthStore();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -106,7 +104,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       {
-        currentUser == null
+        user == null
           ? (
               [
                 <MenuItem key={"register"} onClick={() => {
@@ -200,7 +198,9 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            <Link to="/">
+              Ticket Manager
+            </Link>
           </Typography>
           <Search>
             <SearchIconWrapper>

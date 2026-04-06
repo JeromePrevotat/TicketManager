@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
 using TicketManagerApi.Data;
 using TicketManagerApi.DTO.ApplicationsDTO;
 using TicketManagerApi.Entities;

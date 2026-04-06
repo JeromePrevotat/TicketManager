@@ -35,11 +35,11 @@ public static class DbSeeding
   {
     if (await userManager.Users.AnyAsync()) return ;
 
-    var admin = new User { UserName = "admin", Email = "admin@admin.com" };
+    var admin = new User { UserName = "admin@admin.com", Email = "admin@admin.com" };
     await userManager.CreateAsync(admin, "admin");
     await userManager.AddToRolesAsync(admin, ["Admin", "User"]);
 
-    var user = new User { UserName = "user", Email = "user@user.com" };
+    var user = new User { UserName = "user@user.com", Email = "user@user.com" };
     await userManager.CreateAsync(user, "user");
     await userManager.AddToRoleAsync(user, "User");
   }

@@ -9,13 +9,15 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SendIcon from '@mui/icons-material/Send';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormLabel from '@mui/material/FormLabel';
-import { useState } from 'react';
 
 import "../style/registerForm.css";
 import { ApiService } from '../services/apiService';
+import { useState } from 'react';
+import { useAuthStore } from '../authStore';
 
 
 export default function InputAdornments() {
+  const { user } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,11 +40,21 @@ export default function InputAdornments() {
     }
 
     try {
-      const response = await ApiService.register(email, password);
-      console.log(response);
+      const registerResponse = await ApiService.register(email, password);
+      const loginResponse = await ApiService.login(email, password);
+      const token = loginResponse.accessToken;
+      useAuthStore.setState({ user: { token: token } });
+      const meResponse = await ApiService.me();
+      useAuthStore.setState({ user: {
+        id: meResponse.id,
+        email: meResponse.email,
+        token: token
+        }
+      });
     } catch (error) {
       console.error("Registration failed:", error);
     }
+
   };
 
   return (

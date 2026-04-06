@@ -10,7 +10,6 @@ public static class UserMapper
     return new UserSummaryDto
     {
       Id = user.Id,
-      Username = user.UserName ?? user.Email!,
       Email = user.Email!
     };
   }

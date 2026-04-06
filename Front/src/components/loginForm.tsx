@@ -14,9 +14,11 @@ import "../style/loginForm.css";
 import "../style/globals.css";
 
 import { ApiService } from '../services/apiService';
+import { useAuthStore } from '../authStore';
 
 
 export default function InputAdornments() {
+  const { user } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,8 +35,21 @@ export default function InputAdornments() {
 
   const handleLogin = async () => {
     try {
-      const response = await ApiService.login(email, password);
-      console.log(response);
+      const loginResponse = await ApiService.login(email, password);
+      const token = loginResponse.accessToken;
+      console.log(loginResponse);
+      useAuthStore.setState({ user: {
+          token: token
+        }
+      });
+      const meResponse = await ApiService.me();
+      useAuthStore.setState({ user: {
+          id: meResponse.id,
+          email: meResponse.email,
+          token: token
+        }
+      });
+      console.log("USER: ", useAuthStore.getState().user);
     }
     catch (error) {
       console.error("Login failed: ", error);
