@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Npgsql;
 using Swashbuckle.AspNetCore.Filters;
@@ -24,7 +26,7 @@ var connectionString = conStrBuilder.ConnectionString;
 builder.Services.AddNpgsql<TicketManagerContext>(connectionString);
 
 // Authentication
-builder.Services.AddIdentityApiEndpoints<User>(options =>
+builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
     {
         options.Password.RequiredLength = 3;
         options.Password.RequireDigit = false;
@@ -34,10 +36,32 @@ builder.Services.AddIdentityApiEndpoints<User>(options =>
         options.Password.RequiredUniqueChars = 1;
         options.User.RequireUniqueEmail = true;  
     })
-    .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<TicketManagerContext>();
 // To use BCrypt
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher>();
+// JWT
+builder.Services.AddScoped<JwtService>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
+        )
+    };
+});
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(options =>
@@ -75,8 +99,9 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
     {
         policy.WithOrigins("http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+            .AllowCredentials()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
@@ -102,6 +127,5 @@ app.UseAuthorization();
 // app.UseHttpsRedirection();
 
 app.MapControllers();
-app.MapIdentityApi<User>();
 
 app.Run();

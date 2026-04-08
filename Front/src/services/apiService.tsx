@@ -1,54 +1,24 @@
-import { useAuthStore } from "../authStore";
-
-const BaseUrl = "http://localhost:5205";
+import { api } from "../interceptors/authInterceptor";
 
 export const ApiService = {
-  async authFetch(url: string, options: RequestInit = {}) {
-    const token = useAuthStore.getState().user?.token as string;
-    const headers = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-      ...options.headers,
-    };
-    return fetch(url, { ...options, headers });
-  },
-
   async register(email: string, password: string) {
-    const response = await fetch(`${BaseUrl}/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) throw new Error(`Registration failed: ${response.status}`);
-    const text = await response.text();
-    const data = text ? JSON.parse(text) : null;
+    const response = await api.post("/register", { email, password});
+    if (response.status !== 200) throw new Error(`Registration failed: ${response.status}`);
+    const data = await response.data;
     return data;
   },
 
   async login(email: string, password: string) {
-    const response = await fetch(`${BaseUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password })
-    });
-    if (!response.ok) throw new Error(`Login failed: ${response.status}`);
-    const text = await response.text();
-    const data = text ? JSON.parse(text) : null;
+    const response = await api.post("/login", { email, password });
+    if (response.status !== 200) throw new Error(`Login failed: ${response.status}`);
+    const data = await response.data;
     return data;
   },
 
   async me(){
-    const response = await this.authFetch(`${BaseUrl}/api/users/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-    if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`)
-    return response.json();
+    const response = await api.get("/api/users/me");
+    if (response.status !== 200) throw new Error(`Error: ${response.status} ${response.statusText}`)
+    const data = await response.data;
+    return data;
   }
 };

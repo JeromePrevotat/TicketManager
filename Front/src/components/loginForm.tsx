@@ -37,7 +37,6 @@ export default function InputAdornments() {
     try {
       const loginResponse = await ApiService.login(email, password);
       const token = loginResponse.accessToken;
-      console.log(loginResponse);
       useAuthStore.setState({ user: {
           token: token
         }
@@ -49,7 +48,6 @@ export default function InputAdornments() {
           token: token
         }
       });
-      console.log("USER: ", useAuthStore.getState().user);
     }
     catch (error) {
       console.error("Login failed: ", error);

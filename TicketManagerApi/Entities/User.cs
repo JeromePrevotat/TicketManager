@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TicketManagerApi.Entities;
 
-[Index(nameof(Email), IsUnique = true)]
 public class User : IdentityUser<int>
 {
   public List<Ticket> TicketsCreated { get; set; } = [];
@@ -14,4 +13,6 @@ public class User : IdentityUser<int>
 
   public List<Application> MemberOf { get; set; } = [];
   public List<Application> OwnedApplications { get; set; } = [];
+  public string? RefreshToken { get; set; }
+  public DateTime? RefreshTokenExpiry { get; set; }
 }

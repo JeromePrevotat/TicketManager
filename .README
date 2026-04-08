@@ -1,1 +1,277 @@
 # tickets
+Let me read through the entire backend codebase first. 
+
+Read all backend files
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi)
+
+Searched for files matching `**/TicketManagerApi/**/*.cs`, 20 matches
+
+Searched for files matching `**/TicketManagerApi/**/*.json`, 4 matches
+
+Searched for files matching `**/TicketManagerApi/**/*.csproj`, 1 match
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Controllers)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Services)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Validators)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Properties)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Seeding)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/ApplicationsDTO)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/AuthDTO)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/UsersDTO)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/ApplicationMapper)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/TicketMapper)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/UserMapper)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Program.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/appsettings.json)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/appsettings.Development.json)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/TicketManagerApi.csproj)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Properties/launchSettings.json)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Controllers/AuthController.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Controllers/ApplicationsController.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Controllers/TicketsController.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Controllers/UsersController.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/TicketManagerContext.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/DataExtension.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Seeding/DbSeeding.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/20260327100324_AuthMigrations.cs#1-1), lines 1 to 200
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/20260327100324_AuthMigrations.Designer.cs#1-1), lines 1 to 100
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/20260330163211_RenamedTicketContentField.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/20260330163211_RenamedTicketContentField.Designer.cs#1-1), lines 1 to 100
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/20260408183947_refreshTokens.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/20260408183947_refreshTokens.Designer.cs#1-1), lines 1 to 100
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/TicketManagerContextModelSnapshot.cs#1-1), lines 1 to 400
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities/User.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities/Application.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities/TicketStatus.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities/Ticket.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities/TicketSeverity.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Entities/Attachment.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/AuthDTO/LoginRequestDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/AuthDTO/LoginResponseDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/ApplicationsDTO/ApplicationCreateDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/ApplicationsDTO/ApplicationDetailsDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/ApplicationsDTO/ApplicationEditDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/ApplicationsDTO/ApplicationEditTeamDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketCreateDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketDetailsDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketEditDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketSummaryDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketAssignmentDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketFollowersDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketUpvotersDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/TicketsDTO/TicketEditAttachementsDTO.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/DTO/UsersDTO/UserSummaryDto.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/ApplicationMapper/ApplicationDetailsMapper.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/TicketMapper/TicketSummaryMapper.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/TicketMapper/TicketDetailsMapper.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Mapper/UserMapper/UserMapper.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Services/JwtService.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Services/PasswordHasher.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Services/UserService.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Validators/ValidationExceptionHandler.cs)
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/Data/Migrations/TicketManagerContextModelSnapshot.cs#400-400), lines 400 to 568
+
+Read [](file:///c%3A/Users/Jerpr/Documents/Projects/TicketManager/TicketManagerApi/package.json)
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#1-1), lines 1 to 200
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#200-200), lines 200 to 500
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#500-500), lines 500 to 800
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#800-800), lines 800 to 1100
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#1100-1100), lines 1100 to 1500
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#1500-1500), lines 1500 to 1900
+
+Read [](file:///c%3A/Users/Jerpr/AppData/Roaming/Code/User/workspaceStorage/9832614808b3fe71942736d2335060bc/GitHub.copilot-chat/chat-session-resources/45ca36cc-d82e-41ea-beea-4d8aa09a6dcd/toolu_bdrk_011iK9nx1NcuyCgTRjESFQaZ__vscode-1775663284498/content.txt#1900-1900), lines 1900 to 2009
+
+I've read the entire codebase. Here's the full audit.
+
+---
+
+## CRITICAL — Security / Broken Behavior
+
+### 1. `JwtService` uses an invalid signing algorithm
+In JwtService.cs, you use `SecurityAlgorithms.Aes128CbcHmacSha256`. This is an **encryption** algorithm (A128CBC-HS256), not a signing algorithm. JWT signing requires `SecurityAlgorithms.HmacSha256` (HS256). This will produce invalid tokens that fail validation.
+
+**Fix:** `new SigningCredentials(key, SecurityAlgorithms.HmacSha256)`
+
+### 2. No ownership/authorization checks — any user can do anything
+Every `[Authorize]` endpoint only checks "is the user logged in?", never "does this user own this resource?". Examples:
+- Any user can delete any application (ApplicationsController.cs)
+- Any user can edit any ticket, reassign it, modify followers
+- Any user can create an application owned by someone else (the `OwnerId` comes from the request body, not the JWT)
+
+**Fix:** Extract the user ID from `ClaimTypes.NameIdentifier` (you already do it in `TicketsController.Create` and `UsersController.GetMe`) and verify ownership before mutating.
+
+### 3. `AuthController` route is absolute — bypasses controller prefix
+`[HttpPost("/login")]` — the leading `/` makes this an absolute route. The endpoint is at `/login`, not `/api/auth/login`.
+
+**Fix:** `[HttpPost("login")]` (no leading slash)
+
+### 4. `Secure = true` on cookie + HTTPS disabled = cookie never sent
+In AuthController.cs, the refresh token cookie has `Secure = true`, but `UseHttpsRedirection` is commented out in Program.cs. In development over HTTP, the browser will **never store or send this cookie**.
+
+**Fix:** Make `Secure` conditional: `Secure = !app.Environment.IsDevelopment()`, or enable HTTPS. In production, always `Secure = true`.
+
+### 5. `TicketsController.Create` route is absolute too
+`[HttpPost("/api/applications/{appId}/tickets")]` — absolute route. Works, but bypasses the controller's `[Route("api/[controller]")]` and makes it invisible to anyone reading the controller-level route.
+
+---
+
+## HIGH — Correctness / Data Issues
+
+### 6. `ApplicationDetailsMapper` never maps `MembersId`
+ApplicationDetailsMapper.cs doesn't set `MembersId`. The DTO always returns an empty list regardless of actual members. Plus, `GetById` uses `FindAsync` which doesn't load navigation properties — `Members` would be empty even if you mapped it.
+
+**Fix:** Include `.Include(a => a.Members)` and map `MembersId = app.Members.Select(m => m.Id).ToList()`.
+
+### 7. `GetAllTickets` / `GetAllApplications` — no pagination, loads everything
+Both load the entire table into memory. With growth, this becomes a performance and memory problem.
+
+**Fix:** Add pagination (`Skip`/`Take`) or cursor-based paging.
+
+### 8. Redundant `SaveChangesAsync()` after `ExecuteUpdateAsync`
+In TicketsController.Edit, `ExecuteUpdateAsync` executes immediately against the DB — it bypasses the change tracker. The following `SaveChangesAsync()` does nothing.
+
+**Fix:** Remove the `SaveChangesAsync()` call.
+
+### 9. Redundant `FindAsync` before `ExecuteDeleteAsync` / `ExecuteUpdateAsync`
+In `Delete` and `Edit` methods for both controllers, you first `FindAsync` (1 query), then `ExecuteDeleteAsync` or `ExecuteUpdateAsync` (2nd query). The find is wasted — you can check the return value of `ExecuteDeleteAsync`/`ExecuteUpdateAsync` (returns affected row count) to determine if the entity existed.
+
+**Fix:** `var affected = await dbContext.Tickets.Where(t => t.Id == id).ExecuteDeleteAsync(); if (affected == 0) return NotFound();`
+
+### 10. `AddIdentity` + `AddAuthentication` conflict
+`AddIdentity` internally calls `AddAuthentication` and sets the default scheme to cookies. Then you call `AddAuthentication` again to set JWT as default. This works because the second call overrides the first, but it's fragile and order-dependent. If Identity's internals change, this breaks.
+
+**Fix:** After `AddIdentity`, configure the default schemes explicitly:
+```csharp
+builder.Services.Configure<AuthenticationOptions>(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+});
+```
+
+---
+
+## MEDIUM — Code Quality / Consistency
+
+### 11. Inconsistent DI patterns
+`AuthController` uses constructor injection for `UserManager` and `JwtService`, but `ApplicationsController` and `TicketsController` use method-level injection for `TicketManagerContext`. Pick one pattern per controller. Constructor injection is standard.
+
+### 12. Typo "Attachements" everywhere
+`TicketEditAttachementsDTO`, `EditTicketAttachements`, `AttachementsId` — should be "Attachments" throughout.
+
+### 13. Inconsistent naming
+- Method name `login` is lowercase — should be `Login` (PascalCase per C# convention)
+- DTO suffixes: `UserSummaryDto` vs `LoginResponseDTO` vs `TicketDetailsDTO` — pick one convention
+- File name: `UserSummaryDto.cs` vs LoginResponseDTO.cs
+
+### 14. `UserMapper.ToUserSummaryDto` is not an extension method
+Every other mapper uses `this` (extension method). `UserMapper` doesn't. Choose one pattern.
+
+### 15. Redundant `[Index(nameof(Email), IsUnique = true)]` on User
+Identity already creates a unique index on `NormalizedEmail`. You're adding a duplicate index on `Email`.
+
+### 16. `PasswordHasher` never returns `SuccessRehashNeeded`
+If you ever change the BCrypt work factor (currently 11), existing hashes won't be re-hashed on login. Identity expects the hasher to return `PasswordVerificationResult.SuccessRehashNeeded` when the stored hash uses an outdated work factor.
+
+### 17. No FluentValidation validators exist
+`AddValidatorsFromAssemblyContaining<Program>()` is registered, `ValidationExceptionHandler` exists, but there are zero actual validator classes. Dead infrastructure.
+
+### 18. Empty `UserService` and empty `package.json`
+Dead code. `UserService` has no methods. `package.json` contains `{}`.
+
+---
+
+## LOW — Minor / Nitpicks
+
+### 19. Auto-migration on startup
+`MigrateDb()` in Program.cs applies migrations on every startup. Fine for development, dangerous in production (can cause data loss with bad migrations, race conditions with multiple instances).
+
+### 20. `ApplicationsController.Create` sets unnecessary properties
+`Owner = Owner`, `Tickets = []`, `Members = []` — EF handles these. Only `OwnerId`, `Name`, `Description`, timestamps are needed.
+
+### 21. Unused `using` statements
+AuthController.cs still imports `Microsoft.AspNetCore.Authentication.BearerToken`, `Microsoft.AspNetCore.Http`, `Microsoft.EntityFrameworkCore`, `TicketManagerApi.Data`, `TicketManagerApi.Services` (PasswordHasher) — none are used.
+
+### 22. `TicketEditDTO` has fields that are managed by separate endpoints
+`AssignedTo`, `UpvotedBy`, `FollowedBy`, `AttachmentsId` exist in `TicketEditDTO` but are never used — each has its own dedicated endpoint and DTO. Dead fields.
+
+### 23. `AzureAd` config removed but `Jwt:Issuer`/`Audience` values are generic
+`"Issuer": "TicketManagerApi"` and `"Audience": "TicketManagerApiClient"` are fine — just noting they're set.

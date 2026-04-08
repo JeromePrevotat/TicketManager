@@ -124,7 +124,6 @@ namespace TicketManagerApi.Controllers
                     .SetProperty(t => t.UpdatedAt, DateTime.UtcNow)
                 );
 
-            await dbContext.SaveChangesAsync();
             return NoContent();
         }
 

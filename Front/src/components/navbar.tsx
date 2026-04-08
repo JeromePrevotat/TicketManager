@@ -60,6 +60,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const handleTest = () => {
+    console.log("TEST: ", useAuthStore.getState().user);
+  }
+
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -120,7 +124,8 @@ export default function PrimarySearchAppBar() {
           : (
               [
                 <MenuItem key={"profile"} onClick={handleMenuClose}>Profile</MenuItem>,
-                <MenuItem key={"myaccount"} onClick={handleMenuClose}>My account</MenuItem>
+                <MenuItem key={"myaccount"}
+                  onClick={() => {handleTest(); handleMenuClose()}}>My account</MenuItem>
               ]
             )
       }
