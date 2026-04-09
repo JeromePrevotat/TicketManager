@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TicketManagerApi.DTO.AuthDTO;
 using TicketManagerApi.Entities;
+using TicketManagerApi.Mapper.UserMapper;
 using TicketManagerApi.Services;
 
 namespace TicketManagerApi.Controllers
@@ -14,7 +15,7 @@ namespace TicketManagerApi.Controllers
     ): ControllerBase
     {
         [HttpPost("/login", Name = "Login")]
-        public async Task<ActionResult<LoginResponseDTO>> login(
+        public async Task<ActionResult<LoginResponseDTO>> Login(
             LoginRequestDTO loginRequestDTO
         )
         {
@@ -40,6 +41,32 @@ namespace TicketManagerApi.Controllers
             });
             
             return Ok(new LoginResponseDTO { AccessToken = accessToken });
+        }
+
+        [HttpPost("/register", Name = "Register")]
+        public async Task<ActionResult> Register (
+            RegisterRequestDTO registerRequestDTO
+        )
+        {
+            var existingUser = await userManager.FindByEmailAsync(registerRequestDTO.Email);
+            if (existingUser is not null)
+            {
+                return Conflict("Email already taken");
+            }
+            var newUser = new User {
+                Email = registerRequestDTO.Email,
+                UserName = registerRequestDTO.Email
+            };
+            var result = await userManager.CreateAsync(newUser, registerRequestDTO.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return CreatedAtRoute(
+                routeName: "GetUserById",
+                routeValues: new { id = newUser.Id },
+                value: UserMapper.ToUserSummaryDto(newUser)
+            );
         }
     }
 }
